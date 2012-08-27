@@ -352,8 +352,8 @@ void sendActMailOut(char *email, char *subject, char *msg)
 char *hgLoginHost = wikiLinkHost();
 char cmd[4096];
 safef(cmd,sizeof(cmd),
-    "echo '%s' | mail -s \"%s\" %s  -- -f %s", 
-    msg, subject, email, returnAddr);
+    "echo '%s' | mail -s \"%s\" -r %s %s", 
+    msg, subject, returnAddr, email);
 int result = system(cmd);
 if (result == -1)
     {
