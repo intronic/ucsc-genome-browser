@@ -80,11 +80,18 @@ char *cgiServerName();
 /* Return name of server, better to use cgiServerNamePort() for
    actual URL construction */
 
+boolean cgiIsHttps();
+/* Return true if request is HTTPS */
+
 char *cgiServerPort();
 /* Return port number of server */
 
 char *cgiServerNamePort();
-/* Return name of server with port if different than 80 */
+/* Return name of server with port (if not the standard HTTP port 80 or HTTPS port 443) */
+
+char *cgiServerProtoNamePort();
+/* Return name of server with protocol, name and port
+ * (if not the standard HTTP port 80 or HTTPS port 443) */
 
 char *cgiRemoteAddr();
 /* Return IP address of client (or "unknown"). */

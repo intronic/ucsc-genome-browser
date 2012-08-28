@@ -90,8 +90,15 @@ else
     return "80";
 }
 
+boolean cgiIsHttps()
+/* Return true if request is HTTPS */
+{
+char *https = getenv("HTTPS");
+return https != NULL && sameString(https, "on");
+}
+
 char *cgiServerNamePort()
-/* Return name of server with port if different than 80 */
+/* Return name of server with port (if not the standard HTTP port 80 or HTTPS port 443) */
 {
 char *port = cgiServerPort();
 char *namePort = cgiServerName();
@@ -99,8 +106,31 @@ struct dyString *result = newDyString(256);
 if (namePort)
     {
     dyStringPrintf(result,"%s",namePort);
-    if (differentString(port, "80"))
-	dyStringPrintf(result,":%s",port);
+    if (cgiIsHttps())
+        {
+        if (differentString(port, "443"))
+	    dyStringPrintf(result,":%s",port);
+        }
+    else
+        {
+        if (differentString(port, "80"))
+	    dyStringPrintf(result,":%s",port);
+        }
+    return dyStringCannibalize(&result);
+    }
+else
+    return NULL;
+}
+
+char *cgiServerProtoNamePort()
+/* Return name of server with protocol, name and port 
+ * (if not the standard HTTP port 80 or HTTPS port 443) */
+{
+char *namePort = cgiServerNamePort();
+struct dyString *result = newDyString(256);
+if (namePort)
+    {
+    dyStringPrintf(result,"%s://%s", cgiIsHttps() ? "https" : "http", namePort);
     return dyStringCannibalize(&result);
     }
 else
