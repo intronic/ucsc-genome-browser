@@ -76,6 +76,9 @@ char *cgiRequestContentLength();
 char *cgiScriptName();
 /* Return name of script so libs can do context-sensitive stuff. */
 
+char *cgiScriptPath();
+/* Return path name of cgi scripts (may not be /cgi-bin). */
+
 char *cgiServerName();
 /* Return name of server, better to use cgiServerNamePort() for
    actual URL construction */
@@ -92,6 +95,10 @@ char *cgiServerNamePort();
 char *cgiServerProtoNamePort();
 /* Return name of server with protocol, name and port
  * (if not the standard HTTP port 80 or HTTPS port 443) */
+
+char *cgiServerProtoNamePortScriptPath();
+/* Return name of server with protocol, name, port, and script path
+ * eg: https://genome.ucsc.edu/cgi-bin */
 
 char *cgiRemoteAddr();
 /* Return IP address of client (or "unknown"). */

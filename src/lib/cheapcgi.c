@@ -73,6 +73,12 @@ char *cgiScriptName()
 return getenv("SCRIPT_NAME");
 }
 
+char *cgiScriptPath()
+/* Return path name of cgi scripts (may not be /cgi-bin). */
+{
+return dirname(cloneString(cgiScriptName()));
+}
+
 char *cgiServerName()
 /* Return name of server, better to use cgiServerNamePort() for
    actual URL construction */
@@ -131,6 +137,22 @@ struct dyString *result = newDyString(256);
 if (namePort)
     {
     dyStringPrintf(result,"%s://%s", cgiIsHttps() ? "https" : "http", namePort);
+    return dyStringCannibalize(&result);
+    }
+else
+    return NULL;
+}
+
+char *cgiServerProtoNamePortScriptPath()
+/* Return name of server with protocol, name, port, and script path
+ * eg: https://genome.ucsc.edu/cgi-bin */
+{
+char *namePort = cgiServerNamePort();
+struct dyString *result = newDyString(256);
+if (namePort)
+    {
+    dyStringPrintf(result,"%s://%s%s", 
+		   cgiIsHttps() ? "https" : "http", namePort, cgiScriptPath());
     return dyStringCannibalize(&result);
     }
 else
