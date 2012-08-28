@@ -536,10 +536,9 @@ hPrintf("<div class=\"inputGroup\" id=\"usernameBox\" style=\"display: none;\">"
     "<div class=\"formControls\">"
     "    <input type=\"submit\" name=\"hgLogin.do.accountHelp\" value=\"Continue\" class=\"largeButton\">"
     "     &nbsp;<a href=\"%s\">Cancel</a>"
-    "</div>"
-    "</form>"
-    "</div><!-- END - accountHelpBox -->", username, email, getReturnToURL());
-cartSaveSession(cart);
+    "</div>", username, email, getReturnToURL());
+cartSaveSession(cart); /* makes hidden session var which must be inside form */
+hPrintf("</form> </div><!-- END - accountHelpBox -->");
 }
 
 void sendNewPassword(struct sqlConnection *conn, char *username, char *password)
@@ -653,8 +652,9 @@ hPrintf("<form method=post action=\"hgLogin\" name=\"accountLoginForm\" id=\"acc
     "<div class=\"formControls\">"
     "   <input type=\"submit\" name=\"hgLogin.do.displayLogin\" value=\"Login\" class=\"largeButton\">"
     "    &nbsp;<a href=\"%s\">Cancel</a>"
-    "</div>"
-    "</form>"
+	"</div>", username, getReturnToURL());
+cartSaveSession(cart); /* makes hidden session var which must be inside form */
+hPrintf("</form>"
     "\n"
     "\n"
     "<div id=\"helpBox\">"
@@ -665,8 +665,7 @@ hPrintf("<form method=post action=\"hgLogin\" name=\"accountLoginForm\" id=\"acc
     "\n"
     "\n"
     "</body>"
-    "</html>", username, getReturnToURL());
-cartSaveSession(cart);
+    "</html>");
 }
 
 void activateAccount(struct sqlConnection *conn)
@@ -738,12 +737,12 @@ hPrintf("<div class=\"inputGroup\">"
     "    <input type=\"submit\" name=\"hgLogin.do.changePassword\" value=\"Change Password\" class=\"largeButton\"> &nbsp; "
     "    <a href=\"%s\">Cancel</a>"
     "\n"
-    "</div>"
-    "</form>"
+    "</div>", getReturnToURL());
+cartSaveSession(cart); /* makes hidden session var which must be inside form */
+hPrintf("</form>"
     "\n"
     "</div><!-- END - changePwBox -->"
-    "\n", getReturnToURL());
-cartSaveSession(cart);
+    "\n");
 }
 
 void changePassword(struct sqlConnection *conn)
@@ -877,13 +876,12 @@ hPrintf("<div class=\"inputGroup\">"
     "<div class=\"formControls\">"
     "    <input type=\"submit\" name=\"hgLogin.do.signup\" value=\"Sign Up\" class=\"largeButton\"> &nbsp; "
     "    <a href=\"%s\">Cancel</a>"
-    "</div>"
-    "</form>"
-    "</div><!-- END - signUpBox -->",
+    "</div>",
     cartUsualString(cart, "hgLogin_password", ""), 
     cartUsualString(cart, "hgLogin_password2", ""),
     getReturnToURL());
-cartSaveSession(cart);
+cartSaveSession(cart); /* makes hidden session var which must be inside form */
+hPrintf("</form> </div><!-- END - signUpBox -->");
 }
 
 void signup(struct sqlConnection *conn)
