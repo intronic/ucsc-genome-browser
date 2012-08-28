@@ -304,11 +304,11 @@ char *getReturnToURL()
 /* get URL passed in with returnto URL */
 {
 char *returnURL = cartUsualString(cart, "returnto", "");
-char *hgLoginHost = wikiLinkHost();
+char *hgLoginHost = loginSystemName();
 char returnTo[2048];
 if (!returnURL || sameString(returnURL,""))
    safef(returnTo, sizeof(returnTo),
-        "http://%s/cgi-bin/hgSession?hgS_doMainPage=1", hgLoginHost);
+        "%s/hgSession?hgS_doMainPage=1", hgLoginHost);
 else
    safecpy(returnTo, sizeof(returnTo), returnURL);
 return cloneString(returnTo);
@@ -349,7 +349,7 @@ cartRemove(cart, "hgLogin_userName");
 void sendActMailOut(char *email, char *subject, char *msg)
 /* send mail to email address */
 {
-char *hgLoginHost = wikiLinkHost();
+char *hgLoginHost = loginSystemName();
 char cmd[4096];
 safef(cmd,sizeof(cmd),
     "echo '%s' | mail -s \"%s\" -r %s %s", 
@@ -369,7 +369,7 @@ else
     {
     hPrintf("<script  language=\"JavaScript\">\n"
         "<!-- \n"
-        "window.location =\"http://%s/cgi-bin/hgLogin?hgLogin.do.displayActMailSuccess=1\""
+        "window.location =\"%s/hgLogin?hgLogin.do.displayActMailSuccess=1\""
         "//-->"
         "\n"
         "</script>", hgLoginHost);
@@ -401,7 +401,7 @@ cartRemove(cart, "hgLogin_sendMailContain");
 void sendMailOut(char *email, char *subject, char *msg)
 /* send mail to email address */
 {
-char *hgLoginHost = wikiLinkHost();
+char *hgLoginHost = loginSystemName();
 char *obj = cartUsualString(cart, "hgLogin_helpWith", "");
 char cmd[4096];
 safef(cmd,sizeof(cmd),
@@ -423,7 +423,7 @@ else
     {
     hPrintf("<script  language=\"JavaScript\">\n"
         "<!-- \n"
-        "window.location =\"http://%s/cgi-bin/hgLogin?hgLogin.do.displayMailSuccess=1\""
+        "window.location =\"%s/hgLogin?hgLogin.do.displayMailSuccess=1\""
         "//-->"
         "\n"
         "</script>", hgLoginHost);
@@ -592,12 +592,12 @@ void sendActivateMail(char *email, char *username, char *encToken)
 char subject[256];
 char msg[4096];
 char activateURL[256];
-char *hgLoginHost = wikiLinkHost();
+char *hgLoginHost = loginSystemName();
 char *remoteAddr=getenv("REMOTE_ADDR");
 char *urlEncodedUsername=replaceChars(username," ","%20");
 
 safef(activateURL, sizeof(activateURL),
-    "http://%s/cgi-bin/hgLogin?hgLogin.do.activateAccount=1&user=%s&token=%s\n",
+    "%s/hgLogin?hgLogin.do.activateAccount=1&user=%s&token=%s\n",
     sqlEscapeString(hgLoginHost),
     sqlEscapeString(urlEncodedUsername),
     sqlEscapeString(encToken));

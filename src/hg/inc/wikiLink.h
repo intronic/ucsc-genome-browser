@@ -13,7 +13,7 @@
 #define CFG_LOGIN_SYSTEM_NAME "login.systemName"
 
 char *loginSystemName();
-/* Return the wiki host specified in hg.conf, or NULL.  Allocd here. */
+/* Return the login.systemName for hgLogin specified in hg.conf, or NULL.  Allocd here. */
 
 boolean loginSystemEnabled();
 /* Return TRUE if login.systemName  parameter is defined in hg.conf . */
