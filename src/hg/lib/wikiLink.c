@@ -76,11 +76,9 @@ static char *encodedHgSessionReturnUrl(int hgsid)
 /* Return a CGI-encoded hgSession URL with hgsid.  Free when done. */
 {
 char retBuf[1024];
-char *scriptName = cloneString(cgiScriptName());
-char *cgiPath = dirname(scriptName); /* get actual cgi path (dont assume /cgi-bin/) */
-safef(retBuf, sizeof(retBuf), "%s%s/hgSession?hgsid=%d",
-      cgiServerProtoNamePort(), cgiPath, hgsid);
-freeMem(scriptName);
+char *url = cgiServerProtoNamePortScriptPath();
+safef(retBuf, sizeof(retBuf), "%s/hgSession?hgsid=%d", url, hgsid);
+freeMem(url);
 return cgiEncode(retBuf);
 }
 
