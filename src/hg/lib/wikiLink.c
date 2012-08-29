@@ -40,13 +40,13 @@ return ((cfgOption(CFG_WIKI_HOST) != NULL) &&
 	(cfgOption(CFG_WIKI_LOGGED_IN_COOKIE) != NULL));
 }
 
-static char *wikiLinkUserNameCookie()
+char *wikiLinkUserNameCookie()
 /* Return the cookie name specified in hg.conf as the wiki user name cookie. */
 {
 return cfgOption(CFG_WIKI_USER_NAME_COOKIE);
 }
 
-static char *wikiLinkLoggedInCookie()
+char *wikiLinkLoggedInCookie()
 /* Return the cookie name specified in hg.conf as the wiki logged-in cookie. */
 {
 return cfgOption(CFG_WIKI_LOGGED_IN_COOKIE);

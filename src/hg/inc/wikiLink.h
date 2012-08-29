@@ -28,6 +28,12 @@ char *wikiLinkUserName();
 /* Return the user name specified in cookies from the browser, or NULL if 
  * the user doesn't appear to be logged in. */
 
+char *wikiLinkUserNameCookie();
+/* Return the cookie name specified in hg.conf as the wiki user name cookie. */
+
+char *wikiLinkLoggedInCookie();
+/* Return the cookie name specified in hg.conf as the wiki logged-in cookie. */
+
 char *wikiLinkUserLoginUrl(int hgsid);
 /* Return the URL for the wiki user login page. */
 

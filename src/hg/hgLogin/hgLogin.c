@@ -1119,11 +1119,11 @@ hPrintf("<script language=\"JavaScript\">"
     " document.write(\"Login successful, setting cookies now...\");"
     "</script>\n"
     "<script language=\"JavaScript\">"
-    "document.cookie =  \"wikidb_mw1_UserName=%s; domain=%s; expires=Thu, 31 Dec 2099, 20:47:11 UTC; path=/\"; "
+    "document.cookie =  \"%s=%s; domain=%s; expires=Thu, 31 Dec 2099, 20:47:11 UTC; path=/\"; "
     "\n"
-    "document.cookie =  \"wikidb_mw1_UserID=%d; domain=%s; expires=Thu, 31 Dec 2099, 20:47:11 UTC; path=/\";"
+    "document.cookie =  \"%s=%d; domain=%s; expires=Thu, 31 Dec 2099, 20:47:11 UTC; path=/\";"
     " </script>"
-    "\n", userName, domainName, userID, domainName);
+    "\n", wikiLinkUserNameCookie(), userName, domainName, wikiLinkLoggedInCookie(), userID, domainName);
 cartRemove(cart,"hgLogin_userName");
 returnToURL(150);
 }
@@ -1206,10 +1206,10 @@ hPrintf(
     "\n");
 char *domainName=getCookieDomainName();
 hPrintf("<script language=\"JavaScript\">"
-    "document.cookie =  \"wikidb_mw1_UserName=; domain=%s; expires=Thu, 01-Jan-70 00:00:01 GMT; path=/\"; "
+    "document.cookie =  \"%s=; domain=%s; expires=Thu, 01-Jan-70 00:00:01 GMT; path=/\"; "
     "\n"
-    "document.cookie =  \"wikidb_mw1_UserID=; domain=%s; expires=Thu, 01-Jan-70 00:00:01 GMT; path=/\";"
-    "</script>\n", domainName, domainName);
+    "document.cookie =  \"%s=; domain=%s; expires=Thu, 01-Jan-70 00:00:01 GMT; path=/\";"
+    "</script>\n", wikiLinkUserNameCookie(), domainName, wikiLinkLoggedInCookie(), domainName);
 /* return to "returnto" URL */
 returnToURL(150);
 }
